@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://djq7veoyon4un"]
+
+[ext_resource type="Texture2D" uid="uid://bjfev8bdb6n3e" path="res://proto-sprites/free_plane_sprite/png/Plane/Fly (1).png" id="1_daty2"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_peryc"]
+[ext_resource type="Texture2D" uid="uid://dvj4k786ytl5u" path="res://proto-sprites/free_plane_sprite/png/Plane/Fly (2).png" id="2_melp1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1h8yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_daty2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_melp1")
+}],
+"loop": true,
+"name": &"plane",
+"speed": 15.0
+}]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_peryc")
+
+[node name="Plane" type="RigidBody2D" parent="."]
+can_sleep = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Plane"]
+scale = Vector2(0.16, 0.16)
+sprite_frames = SubResource("SpriteFrames_1h8yn")
+animation = &"plane"
+frame = 1
+frame_progress = 0.898661
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plane"]
+position = Vector2(-0.346917, 0)
+scale = Vector2(3.39283, 1.48362)
+polygon = PackedVector2Array(6.55245, 6.28661, 8.82061, 7.96304, 8.82061, -4.61018, 2.26816, -9.63947, -0.252017, -10.0586, -8.06456, -8.80125, -8.56859, -6.70572, -9.07263, 1.25732, -7.05649, 5.02929, -6.04842, 5.8675, -4.78833, 6.70572, 0.756052, 7.12482, 2.77219, 8.80125)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://0dq6ilmqncgh"]
+
+[ext_resource type="Texture2D" uid="uid://bjfev8bdb6n3e" path="res://art/free_plane_sprite/png/Plane/Fly (1).png" id="1_daty2"]
+[ext_resource type="PhysicsMaterial" uid="uid://dw5qm5dilkhva" path="res://materials/slipery.tres" id="1_g3jds"]
+[ext_resource type="Script" path="res://scenes/game/characters/enemy/enemy.gd" id="1_n1csd"]
+[ext_resource type="Texture2D" uid="uid://dvj4k786ytl5u" path="res://art/free_plane_sprite/png/Plane/Fly (2).png" id="2_melp1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tyytj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_daty2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_melp1")
+}],
+"loop": true,
+"name": &"plane",
+"speed": 15.0
+}]
+
+[node name="Enemy" type="RigidBody2D"]
+physics_material_override = ExtResource("1_g3jds")
+gravity_scale = 0.0
+script = ExtResource("1_n1csd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.231772, 0.231772)
+sprite_frames = SubResource("SpriteFrames_tyytj")
+animation = &"plane"
+frame = 1
+frame_progress = 0.957757
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.238867, 0.238867)
+polygon = PackedVector2Array(-74, -13, -12, -147, 97, -59, 188, 1, 169, 88, 102, 96, 89, 126, 46, 125, 27, 88, -127, 61, -178, -4)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(5.72, 3.84)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

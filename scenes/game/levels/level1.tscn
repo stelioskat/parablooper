@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://wtyei0sfe8ji"]
+
+[ext_resource type="Texture2D" uid="uid://riast7mgt0wi" path="res://art/freetileset/png/Tiles/2.png" id="1_703su"]
+[ext_resource type="Script" path="res://scenes/game/levels/level1.gd" id="1_chede"]
+[ext_resource type="Texture2D" uid="uid://jauk3ja7q58h" path="res://art/freetileset/png/Tiles/13.png" id="2_a1ggx"]
+[ext_resource type="PackedScene" uid="uid://dw7oklhsd1cwr" path="res://scenes/game/characters/bullet/bullet.tscn" id="2_df7jn"]
+[ext_resource type="PackedScene" uid="uid://yx7r8l6fncb7" path="res://scenes/game/characters/canon/canon.tscn" id="2_eanqt"]
+[ext_resource type="PackedScene" uid="uid://0dq6ilmqncgh" path="res://scenes/game/characters/enemy/enemy.tscn" id="3_ke7hy"]
+[ext_resource type="Texture2D" uid="uid://bw8g58opks8h7" path="res://art/freetileset/png/BG/BG.png" id="4_4paor"]
+[ext_resource type="Texture2D" uid="uid://dp8poohieefh0" path="res://art/freetileset/png/Object/Tree_3.png" id="7_7c771"]
+[ext_resource type="PhysicsMaterial" uid="uid://cwlpl2cpwr32t" path="res://materials/smooth_terrain.tres" id="7_6666x"]
+[ext_resource type="Texture2D" uid="uid://cysunkxh1skun" path="res://art/freetileset/png/Object/Tree_2.png" id="10_pwfld"]
+[ext_resource type="Texture2D" uid="uid://dimnp5j1gek6d" path="res://art/freetileset/png/Object/Bush (3).png" id="11_5ccgc"]
+[ext_resource type="Texture2D" uid="uid://bayg6krpxwyyt" path="res://art/freetileset/png/Object/Stone.png" id="12_oyw76"]
+[ext_resource type="Texture2D" uid="uid://ce5wm0if2m32w" path="res://art/freetileset/png/Object/Tree_1.png" id="13_0fj4g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vppki"]
+texture = ExtResource("1_703su")
+texture_region_size = Vector2i(64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6rps3"]
+texture = ExtResource("2_a1ggx")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_ll0oy"]
+tile_size = Vector2i(64, 64)
+uv_clipping = true
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_vppki")
+sources/2 = SubResource("TileSetAtlasSource_6rps3")
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_chede")
+bullet_scene = ExtResource("2_df7jn")
+enemy_scene = ExtResource("3_ke7hy")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(538, 332)
+scale = Vector2(1.129, 1)
+texture = ExtResource("4_4paor")
+
+[node name="ColorRect" type="ColorRect" parent="Bg"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -375.0
+offset_right = -500.0
+offset_bottom = -375.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.984314, 0.945098, 0.945098, 0.192157)
+
+[node name="Canon" parent="." instance=ExtResource("2_eanqt")]
+position = Vector2(529, 625)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(387, 657)
+physics_material_override = ExtResource("7_6666x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-384, -688)
+scale = Vector2(47.16, 1)
+polygon = PackedVector2Array(-5.64037, 688, 28.3079, 688, 23.4097, 728, -0.678541, 728)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Tree3" type="Sprite2D" parent="."]
+position = Vector2(-6, 521)
+texture = ExtResource("7_7c771")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(379, 681)
+scale = Vector2(1.61096, 0.573426)
+tile_set = SubResource("TileSet_ll0oy")
+format = 2
+layer_0/tile_data = PackedInt32Array(-4, 0, 0, -3, 0, 0, -2, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -1, 0, 0, -65536, 0, 0, 65532, 0, 1, 65533, 65536, 1, 65534, 0, 1, 65535, 65536, 1, 0, 0, 1, 1, 65536, 1, 2, 0, 1, 3, 65536, 1, 4, 0, 1, 5, 65536, 1, 6, 0, 1)
+
+[node name="Tree2" type="Sprite2D" parent="."]
+position = Vector2(87, 496)
+texture = ExtResource("10_pwfld")
+
+[node name="Bush(3)" type="Sprite2D" parent="."]
+position = Vector2(483, 626)
+texture = ExtResource("11_5ccgc")
+
+[node name="Stone" type="Sprite2D" parent="."]
+position = Vector2(562, 619)
+texture = ExtResource("12_oyw76")
+
+[node name="Tree1" type="Sprite2D" parent="."]
+position = Vector2(1009, 623)
+texture = ExtResource("13_0fj4g")
+
+[connection signal="fire" from="Canon" to="." method="_on_canon_fire"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

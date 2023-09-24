@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://yx7r8l6fncb7"]
+
+[ext_resource type="Script" path="res://scenes/game/characters/canon/canon.gd" id="1_j6ykf"]
+[ext_resource type="Texture2D" uid="uid://1to8gh8j4tyu" path="res://art/BasicShapes/square.png" id="1_ybgkk"]
+[ext_resource type="Texture2D" uid="uid://cpjkylxub6tc2" path="res://art/BasicShapes/dry-clean.png" id="2_i25hx"]
+[ext_resource type="Texture2D" uid="uid://dtm21wlcdvv8d" path="res://art/BasicShapes/egg.png" id="3_bw04f"]
+
+[sub_resource type="Animation" id="Animation_2g5dx"]
+resource_name = "canon_bouncing"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("CanonPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.872665, 0.872665]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e5ow2"]
+_data = {
+"canon_bouncing": SubResource("Animation_2g5dx")
+}
+
+[node name="Canon" type="Node2D"]
+script = ExtResource("1_j6ykf")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 4.50005)
+scale = Vector2(0.128906, 0.185547)
+texture = ExtResource("1_ybgkk")
+
+[node name="CanonPivot" type="Marker2D" parent="."]
+position = Vector2(0, -48)
+rotation = -0.872665
+
+[node name="PivotSprite" type="Sprite2D" parent="CanonPivot"]
+scale = Vector2(0.0273439, 0.0273439)
+texture = ExtResource("2_i25hx")
+
+[node name="CanonSprite" type="Sprite2D" parent="CanonPivot"]
+position = Vector2(0, -28)
+scale = Vector2(0.0214844, 0.0839844)
+texture = ExtResource("3_bw04f")
+
+[node name="BulletSpawnLocation" type="Marker2D" parent="CanonPivot"]
+position = Vector2(-0.0357666, -48.2701)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "canon_bouncing"
+libraries = {
+"": SubResource("AnimationLibrary_e5ow2")
+}
