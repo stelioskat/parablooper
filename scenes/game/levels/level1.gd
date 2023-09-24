@@ -21,7 +21,7 @@ func _on_canon_fire(bullet_spawn_location):
 
 
 func _on_enemy_timer_timeout():
-	$EnemyTimer.wait_time = randf_range(0.3, 1.2)
+	$EnemySpawnTimer.wait_time = randf_range(0.3, 1.2)
 	var enemy = enemy_scene.instantiate()
 	enemy.position = Vector2(-65, randf_range(50,500))
 	add_child(enemy)
