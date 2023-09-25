@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b14hlmy2w4gqs"]
+
+[ext_resource type="Theme" uid="uid://bgepn7hdxj0g5" path="res://scenes/game/HUD.tres" id="1_swo4c"]
+[ext_resource type="Script" path="res://scenes/game/HUD.gd" id="1_xw6gn"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_swo4c")
+script = ExtResource("1_xw6gn")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_right = 140.0
+offset_bottom = 81.0
+grow_horizontal = 2
+text = "Score: 0"
