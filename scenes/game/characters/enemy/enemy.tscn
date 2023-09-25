@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0dq6ilmqncgh"]
+[gd_scene load_steps=29 format=3 uid="uid://0dq6ilmqncgh"]
 
 [ext_resource type="Texture2D" uid="uid://bjfev8bdb6n3e" path="res://art/free_plane_sprite/png/Plane/Fly (1).png" id="1_daty2"]
 [ext_resource type="Script" path="res://scenes/game/characters/enemy/enemy.gd" id="1_n1csd"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cxx5ekk8wxvbt" path="res://art/explosions/Explosion5[64x64]/0020.png" id="23_v7kka"]
 [ext_resource type="Texture2D" uid="uid://c2qj24xbw7ltp" path="res://art/explosions/Explosion5[64x64]/0021.png" id="24_em4uy"]
 [ext_resource type="Texture2D" uid="uid://cfcrsk0eh1ml2" path="res://art/explosions/Explosion5[64x64]/0022.png" id="25_82rkm"]
+[ext_resource type="Script" path="res://scenes/game/characters/enemy/EnemyArea.gd" id="26_4fas4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyytj"]
 animations = [{
@@ -109,7 +110,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_82rkm")
 }],
-"loop": false,
+"loop": true,
 "name": &"crash",
 "speed": 21.0
 }]
@@ -135,26 +136,26 @@ autoplay = "plane"
 frame_progress = 0.532551
 
 [node name="ExplosionAnimation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.8147e-06, -17)
+position = Vector2(-14, -40)
 rotation = -2.35619
-scale = Vector2(1.60547, 1.17578)
+scale = Vector2(2.65199, 1.94221)
 sprite_frames = SubResource("SpriteFrames_3ytuv")
 animation = &"crash"
-frame = 21
-frame_progress = 1.0
+frame_progress = 0.980785
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(5.72, 3.84)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="EnemyArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 7
+script = ExtResource("26_4fas4")
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
-scale = Vector2(0.238867, 0.238867)
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="EnemyArea"]
+position = Vector2(0.682821, 1.75005)
+scale = Vector2(0.240916, 0.246512)
 polygon = PackedVector2Array(-196.762, -121.406, -12, -147, 97, -59, 221.881, 0, 213.508, 79.5422, 102, 96, 89, 126, 46, 125, 27, 88, -154.898, 58.61, -205.135, -4.18643)
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="EnemyArea" to="." method="_on_area_2d_area_entered"]

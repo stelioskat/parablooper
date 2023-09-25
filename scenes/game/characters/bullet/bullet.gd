@@ -10,7 +10,6 @@ func _ready():
 func _process(delta):
 	var velocity = Vector2(speed, 0.0).rotated(rotation)
 	position += velocity
-	
 
 func _on_area_2d_area_entered(area):
 	queue_free()

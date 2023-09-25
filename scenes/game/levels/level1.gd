@@ -1,5 +1,7 @@
 extends Node2D
 
+signal scored
+
 @export var bullet_scene: PackedScene
 @export var enemy_scene: PackedScene
 
@@ -24,4 +26,10 @@ func _on_enemy_timer_timeout():
 	$EnemySpawnTimer.wait_time = randf_range(0.3, 1.2)
 	var enemy = enemy_scene.instantiate()
 	enemy.position = Vector2(-65, randf_range(50,500))
+	enemy.died.connect(_on_enemy_died)
 	add_child(enemy)
+
+func _on_enemy_died():
+	# for now we always give 1 point for each kilö
+	scored.emit(1)
+	pass
