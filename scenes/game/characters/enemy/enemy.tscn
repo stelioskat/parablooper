@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://0dq6ilmqncgh"]
+[gd_scene load_steps=28 format=3 uid="uid://0dq6ilmqncgh"]
 
 [ext_resource type="Texture2D" uid="uid://bjfev8bdb6n3e" path="res://art/free_plane_sprite/png/Plane/Fly (1).png" id="1_daty2"]
 [ext_resource type="Script" path="res://scenes/game/characters/enemy/enemy.gd" id="1_n1csd"]
@@ -25,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://cxx5ekk8wxvbt" path="res://art/explosions/Explosion5[64x64]/0020.png" id="23_v7kka"]
 [ext_resource type="Texture2D" uid="uid://c2qj24xbw7ltp" path="res://art/explosions/Explosion5[64x64]/0021.png" id="24_em4uy"]
 [ext_resource type="Texture2D" uid="uid://cfcrsk0eh1ml2" path="res://art/explosions/Explosion5[64x64]/0022.png" id="25_82rkm"]
-[ext_resource type="Script" path="res://scenes/game/characters/enemy/EnemyArea.gd" id="26_4fas4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyytj"]
 animations = [{
@@ -149,7 +148,6 @@ scale = Vector2(5.72, 3.84)
 [node name="EnemyArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 7
-script = ExtResource("26_4fas4")
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="EnemyArea"]
 position = Vector2(0.682821, 1.75005)
