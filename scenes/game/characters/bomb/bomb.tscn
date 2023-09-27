@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://crhqy1nagymqg"]
+[gd_scene load_steps=27 format=3 uid="uid://crhqy1nagymqg"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/bomb/bomb.gd" id="1_m3y8p"]
 [ext_resource type="Texture2D" uid="uid://doiwuesx8lws5" path="res://art/free_plane_sprite/png/Bullet/Bullet (1).png" id="2_7t32m"]
@@ -98,6 +98,9 @@ animations = [{
 "speed": 11.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_havja"]
+radius = 10.198
+
 [node name="Bomb" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -123,5 +126,13 @@ frame_progress = 1.0
 [node name="UnspawnTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_havja")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="UnspawnTimer" to="." method="_on_unspawn_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
