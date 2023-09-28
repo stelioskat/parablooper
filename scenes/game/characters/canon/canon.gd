@@ -20,3 +20,8 @@ func _process(delta):
 		$CanonPivot.rotate(-rot_speed * delta)
 	if $CanonPivot.rotation < ration_range && Input.is_action_pressed("right"):
 		$CanonPivot.rotate(rot_speed * delta)
+
+func take_damage(points : int):
+	$Health.take_damage(points)
+	print($Health.get_health())
+	

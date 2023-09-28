@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Paratrooper"
+config/name="Parablooper"
 config/name_localized={
 "el_GR": "Παρατρούπερ"
 }
