@@ -24,7 +24,10 @@ func explode():
 	if is_exploded:
 		return
 		
-	exploded.emit()
+	get_tree().call_group("level","apply_damage",position)
+	
+	set_collision_layer_value(2, false)
+	$Area2D.set_collision_layer_value(2, false)
 	call_deferred("set_freeze_enabled", true)
 	call_deferred("set_axis_velocity", Vector2.ZERO)
 	$BombSprite.visible = false

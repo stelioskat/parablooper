@@ -33,3 +33,18 @@ func _on_enemy_died():
 	# for now we always give 1 point for each kilö
 	scored.emit(1)
 	pass
+	
+func apply_damage(damage_origin : Vector2):
+	# later we could use player/enemy stats or a damage/attack object :thinking:
+	var max_damage = 10
+	var range = 60
+	
+	var nodes = get_tree().get_nodes_in_group("has_health")
+	for node in nodes:
+		var dist = node.position.distance_to(damage_origin)
+		var target_damage = 0
+		if dist <= range:
+			target_damage = (1 - range/3**dist) * max_damage
+		print("dist: %s" % dist)
+		print("dmg: %s" % target_damage)
+		node.take_damage(target_damage)
