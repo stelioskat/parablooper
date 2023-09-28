@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://yx7r8l6fncb7"]
+[gd_scene load_steps=8 format=3 uid="uid://yx7r8l6fncb7"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/canon/canon.gd" id="1_j6ykf"]
 [ext_resource type="Texture2D" uid="uid://1to8gh8j4tyu" path="res://art/BasicShapes/square.png" id="1_ybgkk"]
+[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health.tscn" id="2_c16ua"]
 [ext_resource type="Texture2D" uid="uid://cpjkylxub6tc2" path="res://art/BasicShapes/dry-clean.png" id="2_i25hx"]
 [ext_resource type="Texture2D" uid="uid://dtm21wlcdvv8d" path="res://art/BasicShapes/egg.png" id="3_bw04f"]
 
@@ -27,7 +28,7 @@ _data = {
 "canon_bouncing": SubResource("Animation_2g5dx")
 }
 
-[node name="Canon" type="Node2D"]
+[node name="Canon" type="Node2D" groups=["has_health"]]
 script = ExtResource("1_j6ykf")
 
 [node name="BaseSprite" type="Sprite2D" parent="."]
@@ -44,15 +45,17 @@ scale = Vector2(0.0273439, 0.0273439)
 texture = ExtResource("2_i25hx")
 
 [node name="CanonSprite" type="Sprite2D" parent="CanonPivot"]
-position = Vector2(0, -28)
-scale = Vector2(0.0214844, 0.0839844)
+position = Vector2(0, -19.7264)
+scale = Vector2(0.0214844, 0.0516657)
 texture = ExtResource("3_bw04f")
 
 [node name="BulletSpawnLocation" type="Marker2D" parent="CanonPivot"]
-position = Vector2(-0.0357666, -48.2701)
+position = Vector2(0.140514, -34.0585)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "canon_bouncing"
 libraries = {
 "": SubResource("AnimationLibrary_e5ow2")
 }
+
+[node name="Health" parent="." instance=ExtResource("2_c16ua")]
