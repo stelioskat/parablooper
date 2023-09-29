@@ -1,7 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://crhqy1nagymqg"]
+[gd_scene load_steps=29 format=3 uid="uid://crhqy1nagymqg"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/bomb/bomb.gd" id="1_m3y8p"]
-[ext_resource type="Texture2D" uid="uid://doiwuesx8lws5" path="res://art/free_plane_sprite/png/Bullet/Bullet (1).png" id="2_7t32m"]
+[ext_resource type="Texture2D" uid="uid://c0bl6eg8pfytt" path="res://art/bomb.png" id="2_ifk8k"]
 [ext_resource type="Texture2D" uid="uid://db6y22jiyucfn" path="res://art/explosions/Explosion4/0005.png" id="7_jdvms"]
 [ext_resource type="Texture2D" uid="uid://c20gxi8h4q425" path="res://art/explosions/Explosion4/0006.png" id="8_a1mhg"]
 [ext_resource type="Texture2D" uid="uid://6pa15wq02sid" path="res://art/explosions/Explosion4/0007.png" id="9_333f0"]
@@ -19,13 +19,15 @@
 [ext_resource type="Texture2D" uid="uid://d4dienv30kdwe" path="res://art/explosions/Explosion4/0019.png" id="21_bce6b"]
 [ext_resource type="Texture2D" uid="uid://fk18ntw3h6cq" path="res://art/explosions/Explosion4/0020.png" id="22_aevq6"]
 [ext_resource type="Texture2D" uid="uid://crq75vy0gmmog" path="res://art/explosions/Explosion4/0021.png" id="23_ifesm"]
+[ext_resource type="AudioStream" uid="uid://bjrv34k018hya" path="res://art/fx/falling-bomb.mp3" id="24_e1wbn"]
 [ext_resource type="Texture2D" uid="uid://ctsuondfu6lm1" path="res://art/explosions/Explosion4/0022.png" id="24_kx8eg"]
 [ext_resource type="Texture2D" uid="uid://cm0bv7j4gq3mg" path="res://art/explosions/Explosion4/0023.png" id="25_u8lqp"]
+[ext_resource type="AudioStream" uid="uid://dq4x8x7garkai" path="res://art/fx/hq-explosion-6288.mp3" id="25_y58q3"]
 [ext_resource type="Texture2D" uid="uid://d2fkb5oo6udgt" path="res://art/explosions/Explosion4/0024.png" id="26_doxh6"]
 [ext_resource type="Texture2D" uid="uid://csasd6gvwphjf" path="res://art/explosions/Explosion4/0025.png" id="27_08i5h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dtk06"]
-radius = 40.1123
+radius = 138.462
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a0kei"]
 animations = [{
@@ -99,23 +101,24 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_havja"]
-radius = 10.198
+radius = 11.5385
 
 [node name="Bomb" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 5
-gravity_scale = 0.1
+gravity_scale = 0.2
 max_contacts_reported = 4
 contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_m3y8p")
 
 [node name="BombSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.195, 0.624)
-texture = ExtResource("2_7t32m")
+position = Vector2(3, -5.96046e-08)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ifk8k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.13, 0.13)
 shape = SubResource("CircleShape2D_dtk06")
 
 [node name="ExplosionAnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -133,8 +136,25 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(-1.56, -1.48)
 shape = SubResource("CircleShape2D_havja")
 
+[node name="FallingFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_e1wbn")
+pitch_scale = 0.6
+max_distance = 1000.0
+attenuation = 2.46229
+area_mask = 4
+
+[node name="ExplodeFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_y58q3")
+volume_db = -4.0
+max_distance = 1000.0
+attenuation = 2.21914
+bus = &"SoundFX"
+area_mask = 4
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="UnspawnTimer" to="." method="_on_unspawn_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
