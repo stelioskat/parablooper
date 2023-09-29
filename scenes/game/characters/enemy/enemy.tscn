@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://0dq6ilmqncgh"]
+[gd_scene load_steps=61 format=3 uid="uid://0dq6ilmqncgh"]
 
 [ext_resource type="Texture2D" uid="uid://bjfev8bdb6n3e" path="res://art/free_plane_sprite/png/Plane/Fly (1).png" id="1_daty2"]
 [ext_resource type="Script" path="res://scenes/game/characters/enemy/enemy.gd" id="1_n1csd"]
@@ -54,6 +54,9 @@
 [ext_resource type="Texture2D" uid="uid://cnx5qq34a0wbs" path="res://art/explosions/Explosion3/0028.png" id="30_ciyeo"]
 [ext_resource type="Texture2D" uid="uid://canuehw27oc8u" path="res://art/explosions/Explosion3/0029.png" id="31_lwpwu"]
 [ext_resource type="Texture2D" uid="uid://jpp6dyvby6yh" path="res://art/explosions/Explosion3/0030.png" id="32_4fk8x"]
+[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health.tscn" id="55_gsooq"]
+[ext_resource type="AudioStream" uid="uid://dicut7jq5kr0r" path="res://art/fx/small-airplane-flyby-13849.mp3" id="56_2rpw5"]
+[ext_resource type="AudioStream" uid="uid://dq4x8x7garkai" path="res://art/fx/hq-explosion-6288.mp3" id="57_v4dq6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tyytj"]
 animations = [{
@@ -235,7 +238,7 @@ animations = [{
 "speed": 33.0
 }]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["has_health"]]
 position = Vector2(128, 79)
 collision_layer = 2
 collision_mask = 5
@@ -292,6 +295,21 @@ sprite_frames = SubResource("SpriteFrames_3ytuv")
 animation = &"crash"
 frame = 21
 frame_progress = 1.0
+
+[node name="Health" parent="." instance=ExtResource("55_gsooq")]
+
+[node name="PropSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("56_2rpw5")
+attenuation = 3.73213
+area_mask = 4
+
+[node name="ExplodeFX" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -2)
+stream = ExtResource("57_v4dq6")
+pitch_scale = 0.55
+attenuation = 1.07177
+bus = &"SoundFX"
+area_mask = 4
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

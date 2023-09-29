@@ -12,7 +12,8 @@ enum {FLY, HIT, FALL, AGROUND, DEAD}
 var state = FLY
 
 func _ready():
-	$BombTimer.start(randf_range(0.2, 1))
+	$BombTimer.start(randf_range(0.8, 2))
+	$PropSound.play()
 
 func _process(delta):		
 	if state == HIT and rotation < PI/5:
@@ -42,9 +43,10 @@ func _on_area_2d_area_entered(area):
 		state = HIT
 	else:
 		state = DEAD
+		$ExplodeFX.play()
 		$Animations/AirExplosion.play()
 		$PlanePivot/PlaneAnimation.hide()
-		$DeathTimer.start(0.5)
+		$DeathTimer.start(1.5)
 	hits += 1
 
 
@@ -55,6 +57,7 @@ func _on_death_timer_timeout():
 func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()
 	bomb.init(position + Vector2(0, 20), get_real_velocity())
+	
 	add_sibling(bomb)
 	
 func invert_direction():
