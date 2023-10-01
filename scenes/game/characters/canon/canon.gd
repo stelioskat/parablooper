@@ -3,7 +3,7 @@ class_name Canon
 
 signal fire
 
-var rot_speed = 1.8*PI 
+var rot_speed = 1.4*PI 
 var ration_range = PI/2.5
 var _heat = 0
 
