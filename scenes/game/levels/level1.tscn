@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://jauk3ja7q58h" path="res://art/freetileset/png/Tiles/13.png" id="2_a1ggx"]
 [ext_resource type="PackedScene" uid="uid://dw7oklhsd1cwr" path="res://scenes/game/characters/bullet/bullet.tscn" id="2_df7jn"]
 [ext_resource type="PackedScene" uid="uid://yx7r8l6fncb7" path="res://scenes/game/characters/canon/canon.tscn" id="2_eanqt"]
-[ext_resource type="PackedScene" uid="uid://0dq6ilmqncgh" path="res://scenes/game/characters/enemy/enemy.tscn" id="3_ke7hy"]
+[ext_resource type="PackedScene" uid="uid://0dq6ilmqncgh" path="res://scenes/game/characters/plane/plane.tscn" id="3_0qg81"]
 [ext_resource type="Texture2D" uid="uid://bw8g58opks8h7" path="res://art/freetileset/png/BG/BG.png" id="4_4paor"]
 [ext_resource type="Texture2D" uid="uid://dp8poohieefh0" path="res://art/freetileset/png/Object/Tree_3.png" id="7_7c771"]
 [ext_resource type="PhysicsMaterial" uid="uid://cwlpl2cpwr32t" path="res://materials/smooth_terrain.tres" id="7_6666x"]
@@ -50,7 +50,7 @@ sources/2 = SubResource("TileSetAtlasSource_6rps3")
 [node name="Level1" type="Node2D" groups=["level"]]
 script = ExtResource("1_chede")
 bullet_scene = ExtResource("2_df7jn")
-enemy_scene = ExtResource("3_ke7hy")
+enemy_scene = ExtResource("3_0qg81")
 
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(955.25, 527)
@@ -58,16 +58,16 @@ scale = Vector2(1.9635, 1.52)
 texture = ExtResource("4_4paor")
 
 [node name="ColorRect" type="ColorRect" parent="Bg"]
-anchors_preset = -1
-anchor_right = 1.731
-anchor_bottom = 1.495
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -500.0
 offset_top = -375.0
 offset_right = -500.0
-offset_bottom = -375.25
+offset_bottom = -375.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.984314, 0.945098, 0.945098, 0.192157)
+color = Color(1, 1, 1, 0)
 
 [node name="Canon" parent="." instance=ExtResource("2_eanqt")]
 position = Vector2(960, 1000)

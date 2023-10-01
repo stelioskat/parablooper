@@ -4,16 +4,16 @@ class_name Health
 signal health_update
 
 var max_health = 100
-var health = max_health
+var _health = max_health
 
-func take_damage(points):
-	if health <= 0:
+func damage(points):
+	if _health <= 0:
 		return
 		
-	health -= abs(points)
-	if health < 0:
-		health = 0
-	health_update.emit(health)
+	_health -= abs(points)
+	if _health < 0:
+		_health = 0
+	health_update.emit(_health)
 
 func get_health():
-	return health
+	return _health
