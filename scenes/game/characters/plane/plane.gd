@@ -12,6 +12,7 @@ var _state = FLY
 
 
 func _ready():
+	$AnimationPlayer.play("plane_vibration")
 	$BombTimer.start(randf_range(0.8, 2))
 	$PropSound.play()
 
@@ -27,8 +28,7 @@ func _process(delta):
 		velocity = Vector2.ZERO
 		if _state != AGROUND:
 			_state = AGROUND
-			$Animations/Grounding.play()
-			$DeathTimer.start(0.5)			
+			$Health.damage(50)
 		
 	move_and_slide()
 
@@ -40,8 +40,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 func _on_area_2d_area_entered(area):
 	# TODO validate if area is a bullet
 	$Health.damage(50)
-#	if _state != DEAD:
-		
 
 
 func _on_death_timer_timeout():
@@ -69,6 +67,9 @@ func _on_health_health_update(health):
 		_state = DEAD
 		died.emit()
 		$ExplodeFX.play()
-		$Animations/AirExplosion.play()
+		if is_on_floor():
+			$Animations/Grounding.play()
+		else:
+			$Animations/AirExplosion.play()
 		$PlanePivot/PlaneAnimation.hide()
-		$DeathTimer.start(1.5)
+		$DeathTimer.start(0.5)

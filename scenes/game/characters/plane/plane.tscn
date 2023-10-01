@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://0dq6ilmqncgh"]
+[gd_scene load_steps=64 format=3 uid="uid://0dq6ilmqncgh"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/plane/plane.gd" id="1_t26qx"]
 [ext_resource type="PackedScene" uid="uid://crhqy1nagymqg" path="res://scenes/game/characters/bomb/bomb.tscn" id="2_qy714"]
@@ -238,8 +238,46 @@ animations = [{
 "speed": 33.0
 }]
 
+[sub_resource type="Animation" id="Animation_ncwpl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlanePivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rtlo6"]
+resource_name = "plane_vibration"
+length = 0.075
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlanePivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qivx2"]
+_data = {
+"RESET": SubResource("Animation_ncwpl"),
+"plane_vibration": SubResource("Animation_rtlo6")
+}
+
 [node name="Plane" type="CharacterBody2D" groups=["has_health"]]
-position = Vector2(128, 79)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_t26qx")
@@ -300,7 +338,7 @@ frame_progress = 1.0
 
 [node name="PropSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("56_gdd4v")
-attenuation = 3.73213
+attenuation = 2.07053
 area_mask = 4
 
 [node name="ExplodeFX" type="AudioStreamPlayer2D" parent="."]
@@ -310,6 +348,11 @@ pitch_scale = 0.55
 attenuation = 1.07177
 bus = &"SoundFX"
 area_mask = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qivx2")
+}
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yx7r8l6fncb7"]
+[gd_scene load_steps=13 format=3 uid="uid://yx7r8l6fncb7"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/canon/canon.gd" id="1_j6ykf"]
 [ext_resource type="Texture2D" uid="uid://1to8gh8j4tyu" path="res://art/BasicShapes/square.png" id="1_ybgkk"]
@@ -9,25 +9,65 @@
 [ext_resource type="PackedScene" uid="uid://dpfi5cci02rul" path="res://scenes/game/misc/health_bar/health_bar.tscn" id="7_wx0cg"]
 [ext_resource type="Script" path="res://scenes/game/misc/health_bar/health_bar.gd" id="8_81uxx"]
 
-[sub_resource type="Animation" id="Animation_2g5dx"]
-resource_name = "canon_bouncing"
-length = 3.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_isiy1"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("CanonPivot:rotation")
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanonPivot/CanonSprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.872665, 0.872665]
+"values": [Vector2(0.025, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanonPivot/CanonSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19.7264)]
+}
+
+[sub_resource type="Animation" id="Animation_2g5dx"]
+resource_name = "canon_bouncing"
+length = 0.1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanonPivot/CanonSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.05), Vector2(0.025, 0.025), Vector2(0.025, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanonPivot/CanonSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -19.7264), Vector2(-0.14978, -6.40137), Vector2(0, -19.7264)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5ow2"]
 _data = {
+"RESET": SubResource("Animation_isiy1"),
 "canon_bouncing": SubResource("Animation_2g5dx")
 }
 
@@ -49,23 +89,24 @@ texture = ExtResource("1_ybgkk")
 position = Vector2(0, -48)
 rotation = -0.872665
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanonPivot"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_e5ow2")
+}
+blend_times = [&"canon_bouncing", &"canon_bouncing", 0.007]
+
 [node name="PivotSprite" type="Sprite2D" parent="CanonPivot"]
 scale = Vector2(0.0273439, 0.0273439)
 texture = ExtResource("2_i25hx")
 
 [node name="CanonSprite" type="Sprite2D" parent="CanonPivot"]
 position = Vector2(0, -19.7264)
-scale = Vector2(0.0214844, 0.0516657)
+scale = Vector2(0.025, 0.05)
 texture = ExtResource("3_bw04f")
 
 [node name="BulletSpawnLocation" type="Marker2D" parent="CanonPivot"]
 position = Vector2(0.140514, -34.0585)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "canon_bouncing"
-libraries = {
-"": SubResource("AnimationLibrary_e5ow2")
-}
 
 [node name="Health" parent="." instance=ExtResource("2_c16ua")]
 

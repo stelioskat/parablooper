@@ -18,6 +18,8 @@ func _process(delta):
 		var bsl = $CanonPivot/BulletSpawnLocation
 		bsl.rotation = $CanonPivot.rotation-PI/2
 		$ShootFX.play(0.1)
+		$CanonPivot/AnimationPlayer.stop(  )
+		$CanonPivot/AnimationPlayer.play("canon_bouncing")
 		fire.emit($CanonPivot/BulletSpawnLocation)
 		
 		_set_heat(_heat + 15)
