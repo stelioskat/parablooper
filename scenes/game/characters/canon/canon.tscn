@@ -82,4 +82,16 @@ area_mask = 4
 position = Vector2(0, -30)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("8_81uxx")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HeatHSlider" type="HSlider" parent="."]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -16.0
+theme_override_icons/grabber = SubResource("ImageTexture_c0wx4")
+
 [connection signal="health_update" from="Health" to="." method="_on_health_health_update"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
