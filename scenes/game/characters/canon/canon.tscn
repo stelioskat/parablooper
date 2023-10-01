@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://yx7r8l6fncb7"]
+[gd_scene load_steps=12 format=3 uid="uid://yx7r8l6fncb7"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/canon/canon.gd" id="1_j6ykf"]
 [ext_resource type="Texture2D" uid="uid://1to8gh8j4tyu" path="res://art/BasicShapes/square.png" id="1_ybgkk"]
-[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health.tscn" id="2_c16ua"]
+[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health/health.tscn" id="2_c16ua"]
 [ext_resource type="Texture2D" uid="uid://cpjkylxub6tc2" path="res://art/BasicShapes/dry-clean.png" id="2_i25hx"]
 [ext_resource type="Texture2D" uid="uid://dtm21wlcdvv8d" path="res://art/BasicShapes/egg.png" id="3_bw04f"]
 [ext_resource type="AudioStream" uid="uid://b6khtviylcsfu" path="res://art/fx/big-impact-7054.mp3" id="6_8liao"]
+[ext_resource type="PackedScene" uid="uid://dpfi5cci02rul" path="res://scenes/game/misc/health_bar/health_bar.tscn" id="7_wx0cg"]
+[ext_resource type="Script" path="res://scenes/game/misc/health_bar/health_bar.gd" id="8_81uxx"]
 
 [sub_resource type="Animation" id="Animation_2g5dx"]
 resource_name = "canon_bouncing"
@@ -28,6 +30,8 @@ tracks/0/keys = {
 _data = {
 "canon_bouncing": SubResource("Animation_2g5dx")
 }
+
+[sub_resource type="ImageTexture" id="ImageTexture_c0wx4"]
 
 [node name="Canon" type="Node2D" groups=["has_health"]]
 script = ExtResource("1_j6ykf")
@@ -74,4 +78,8 @@ volume_db = 2.796
 bus = &"SoundFX"
 area_mask = 4
 
+[node name="HealthBar" parent="." instance=ExtResource("7_wx0cg")]
+position = Vector2(0, -30)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("8_81uxx")
 [connection signal="health_update" from="Health" to="." method="_on_health_health_update"]

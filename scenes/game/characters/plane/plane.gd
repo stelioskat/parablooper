@@ -10,9 +10,11 @@ var _fly_direction = 1
 enum {FLY, HIT, FALL, AGROUND, DEAD}
 var _state = FLY
 
+
 func _ready():
 	$BombTimer.start(randf_range(0.8, 2))
 	$PropSound.play()
+
 
 func _process(delta):		
 	if _state == HIT and rotation < PI/5:
@@ -51,7 +53,8 @@ func _on_bomb_timer_timeout():
 	bomb.init(position + Vector2(0, 20), get_real_velocity())
 	
 	add_sibling(bomb)
-	
+
+
 func invert_direction():
 	_fly_direction = -_fly_direction
 	$PlanePivot/PlaneAnimation.scale *= Vector2(_fly_direction, 1)

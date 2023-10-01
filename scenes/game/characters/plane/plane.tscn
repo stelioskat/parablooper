@@ -54,7 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://cxx5ekk8wxvbt" path="res://art/explosions/Explosion5[64x64]/0020.png" id="52_dfold"]
 [ext_resource type="Texture2D" uid="uid://c2qj24xbw7ltp" path="res://art/explosions/Explosion5[64x64]/0021.png" id="53_7hc4f"]
 [ext_resource type="Texture2D" uid="uid://cfcrsk0eh1ml2" path="res://art/explosions/Explosion5[64x64]/0022.png" id="54_qu2cf"]
-[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health.tscn" id="55_vxdgc"]
+[ext_resource type="PackedScene" uid="uid://b5vhd0hyhdn6j" path="res://scenes/game/misc/health/health.tscn" id="55_vxdgc"]
 [ext_resource type="AudioStream" uid="uid://dicut7jq5kr0r" path="res://art/fx/small-airplane-flyby-13849.mp3" id="56_gdd4v"]
 [ext_resource type="AudioStream" uid="uid://dq4x8x7garkai" path="res://art/fx/hq-explosion-6288.mp3" id="57_22tll"]
 

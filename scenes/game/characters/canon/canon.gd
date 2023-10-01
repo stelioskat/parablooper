@@ -26,6 +26,7 @@ func _process(delta):
 
 
 func _on_health_health_update(health):
+	$HealthBar.set_health(health)
 	if health <= 0:
 		# game over
 		queue_free()
