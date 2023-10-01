@@ -9,3 +9,5 @@ script = ExtResource("1_y47qr")
 level_scene = ExtResource("2_nnikw")
 
 [node name="HUD" parent="." instance=ExtResource("3_xwyhm")]
+size_flags_horizontal = 8
+size_flags_vertical = 10

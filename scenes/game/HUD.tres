@@ -4,5 +4,5 @@
 
 [resource]
 default_font = ExtResource("1_dl7os")
-default_font_size = 64
+default_font_size = 51
 Label/colors/font_color = Color(0, 0, 0, 1)

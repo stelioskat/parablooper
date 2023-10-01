@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpfi5cci02rul"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_8vmc7"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_r8fpr"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ridnw"]
+
+[node name="HealthBar" type="Node2D"]
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = -50.0
+offset_top = -7.0
+offset_right = 50.0
+offset_bottom = 8.0
+pivot_offset = Vector2(50, 7)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_icons/grabber = SubResource("ImageTexture_8vmc7")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_r8fpr")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_ridnw")
+value = 100.0
+editable = false
+scrollable = false

@@ -58,4 +58,4 @@ func apply_damage(damage_origin : Vector2):
 		if dist <= range:
 			target_damage = roundi((1-dist**2/range**2) * max_damage)
 		if target_damage > 0:
-			node.get_node("Health").take_damage(target_damage)
+			node.get_node("Health").damage(target_damage)
