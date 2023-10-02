@@ -1,6 +1,7 @@
 extends Node2D
 
 signal scored
+signal game_over
 
 @export var bullet_scene: PackedScene
 @export var enemy_scene: PackedScene
@@ -59,3 +60,8 @@ func apply_damage(damage_origin : Vector2):
 			target_damage = roundi((1-dist**2/range**2) * max_damage)
 		if target_damage > 0:
 			node.get_node("Health").damage(target_damage)
+
+
+func _on_canon_died():
+	game_over.emit()
+	$EnemySpawnTimer.stop()

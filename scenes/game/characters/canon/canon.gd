@@ -2,6 +2,7 @@ extends Node2D
 class_name Canon
 
 signal fire
+signal died
 
 var rot_speed = 1.4*PI 
 var ration_range = PI/2.5
@@ -38,6 +39,7 @@ func _on_health_health_update(health):
 	$HealthBar.set_health(health)
 	if health <= 0:
 		# game over
+		died.emit()
 		queue_free()
 
 

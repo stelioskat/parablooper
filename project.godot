@@ -22,6 +22,7 @@ config/windows_native_icon="res://icon.ico"
 [autoload]
 
 Music="*res://scenes/game/music.tscn"
+Scores="*res://scores.gd"
 
 [display]
 
